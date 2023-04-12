@@ -3,15 +3,15 @@ import pandas as pd
 
 data = {}
 
-df = pd.read_csv('data/Hamburg_mobile_pivot_2022-09-22.csv')
+df = pd.read_csv('data/Hamburg_mobile_pivot_2023-03-27.csv')
 
 for index, row in df.iterrows():
-    if pd.notna(row[5]) and pd.notna(row[6]):  # check if both columns have values
+    if pd.notna(float(row[5])):  # check if the NO2 column has values
         # add the row to the dictionary
-        key = row[2]  # use the third column as the key
-        data[key] = {'loc': row[3], 'NO2': row[5], 'O3': row[6]}
+        key = row[2]  # use the GPS timestamp column as the key - because it is unique
+        data[key] = {'NO2': float(row[5]), 'location': row[3]}
 
 # write the dictionary to a JSON file
-with open('NO2-O3.json', 'w') as outfile:
+with open('General_NO2.json', 'w') as outfile:
     json.dump(data, outfile)
 

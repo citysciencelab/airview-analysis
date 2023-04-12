@@ -1,21 +1,29 @@
 import unittest
-from functions import calculate_statistics
+import json
+import pandas as pd
 
 class TestCalculateStatistics(unittest.TestCase):
 
-    def test_calculate_statistics(self):
-        # Test case 1: Test with valid input data
-        data = {"field1": [1, 2, 3, 4, 5]}
-        expected_output = {"mean": 3.0, "median": 3.0, "25th percentile": 2.0, "75th percentile": 4.0}
-        self.assertDictEqual(calculate_statistics(data), expected_output)
+    def test_csv_reader(self):
 
-        # Test case 2: Test with empty input data
-        data = {"field1": []}
-        expected_output = {"mean": None, "median": None, "25th percentile": None, "75th percentile": None}
-        self.assertDictEqual(calculate_statistics(data), expected_output)
+        df = pd.read_csv('data/Hamburg_mobile_pivot_2023-03-27.csv')
+        data = {}
 
-        # Test case 3: Test with invalid input data
-        data = {"field1": "invalid data"}
-        with self.assertRaises(TypeError):
-            calculate_statistics(data)
+        with open('General_NO2.json', 'r') as infile:
+            dataIn = json.load(infile)
 
+        for index, row in df.iterrows():
+            if pd.notna(float(row[5])):  # check if the NO2 column has values
+                # add the row to the dictionary
+                key = row[2]  # use the GPS timestamp column as the key - because it is unique
+                if key in data:
+                    # test if the time stamps are unique
+                    self.assertRaises("TIMESTAMP IS NOT UNIQUE", key)
+                data[key] = {'NO2': float(row[5]), 'location': row[3]}
+                if dataIn[key] != data[key]:
+                    # test if the entries in the csv file match the json file entries
+                    self.assertRaises("ENTRY DOES NOT MATCH", key, dataIn[key], data[key])
+
+
+if __name__ == '__main__':
+    unittest.main()
