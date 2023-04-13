@@ -1,3 +1,7 @@
 .idea/
 venv/
 data/
+Plots/
+__pycache__/
+*.json
+*.txt
