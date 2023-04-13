@@ -1,18 +1,24 @@
 import json
 
 
-# read the data from the general Json file
-with open('General_NO2.json', 'r') as infile:
-    NO2_data = json.load(infile)
+def data_extraction(sp):
 
-# Extract the 'NO2' field from each dictionary and save them in a NumPy array
-NO2_datapoints = [d['NO2'] for d in NO2_data.values()]
+    json_file_name = "General_" + sp + ".json"
+    data_name = sp + "_data"
+    datapoint_name = sp + "_datapoints"
 
-NO2 = []
+    with open(json_file_name, 'r') as infile:
+        data_name = json.load(infile)
 
-# make sure the data is of type float
-for n in NO2_datapoints:
-    NO2.append(float(n))
+    datapoint_name = [d[sp] for d in data_name.values()]
+
+    sp = []
+
+    # make sure the data is of type float
+    for n in datapoint_name:
+        sp.append(float(n))
+
+    return sp
 
 
 
