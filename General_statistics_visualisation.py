@@ -86,7 +86,7 @@ fig, ax = plt.subplots()
 n, bins, patches = ax.hist(Pm25_mes, bins=40, edgecolor='black', linewidth=1.2)
 ax.set_xlabel('Measurement')
 ax.set_ylabel('Frequency')
-ax.set_title('Histogram of PM2.5 Measurements (?)')
+ax.set_title('Histogram of PM2.5 Measurements (\u03BCg/m3)')
 
 bin_centers = 0.5 * (bins[:-1] + bins[1:])
 ax.set_xticks(bin_centers)
