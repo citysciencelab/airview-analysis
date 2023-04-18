@@ -25,6 +25,7 @@ print("Length of the Pm25 measurement list:", len(Pm25_mes))
 print("Maximum Pm25 value", max(Pm25_mes))
 print("Minimum Pm25 value", min(Pm25_mes))
 
+'''
 # ------------------------------ HISTOGRAMS -----------------------------------------
 # NO2
 
@@ -95,7 +96,7 @@ ax.set_xticklabels([f'{val:.2f}' for val in bin_centers], rotation=45, ha='right
 fig.savefig('Plots/PM2.5_histogram.png')
 '''
 
-def find_outliers(data, multiplier=3):
+def find_outliers(data, multiplier=5):
     q1 = np.percentile(data, 25)
     print(q1)
     q3 = np.percentile(data, 75)
@@ -112,10 +113,10 @@ def find_outliers(data, multiplier=3):
     return outliers, lower_bound, upper_bound
 
 
-measurements = NO2_mes
+measurements = CO_mes
 outliers, lower_bound, upper_bound = find_outliers(measurements)
 
-#print("Outliers:", outliers)
+#----------------------------------- BOX PLOTS -----------------------------------
 
 # Plot the box plot
 plt.boxplot(measurements)
@@ -127,4 +128,3 @@ for outlier in outliers:
     plt.plot(1, outlier, 'r', ms=2)
 
 plt.show()
-'''
