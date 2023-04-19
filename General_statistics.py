@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import measurement_list as ml
 import numpy as np
+import seaborn as sns
 
 NO2_mes = ml.data_extraction("NO2")
 O3_mes = ml.data_extraction("O3")
@@ -8,7 +9,10 @@ CO_mes = ml.data_extraction("CO")
 CO2_mes = ml.data_extraction("CO2")
 Pm25_mes = ml.data_extraction("Pm25")
 
+'''
+
 print("------- general info about the data -----------")
+
 print("Length of the NO2 measurement list:", len(NO2_mes))
 print("Maximum NO2 value", max(NO2_mes))
 print("Minimum NO2 value", min(NO2_mes))
@@ -25,7 +29,7 @@ print("Length of the Pm25 measurement list:", len(Pm25_mes))
 print("Maximum Pm25 value", max(Pm25_mes))
 print("Minimum Pm25 value", min(Pm25_mes))
 
-'''
+
 # ------------------------------ HISTOGRAMS -----------------------------------------
 # NO2
 
@@ -95,36 +99,68 @@ ax.set_xticklabels([f'{val:.2f}' for val in bin_centers], rotation=45, ha='right
 
 fig.savefig('Plots/PM2.5_histogram.png')
 '''
+#------------------------------- DATA POSTPROCESSING ----------------
 
-def find_outliers(data, multiplier=5):
-    q1 = np.percentile(data, 25)
-    print(q1)
-    q3 = np.percentile(data, 75)
-    print(q3)
-    iqr = q3 - q1
+#CO
 
-    lower_bound = q1 - multiplier * iqr
-    print(lower_bound)
-    upper_bound = q3 + multiplier * iqr
-    print(upper_bound)
+CO_neg_count = 0 #counter for negative values
 
-    outliers = [x for x in data if x < lower_bound or x > upper_bound]
+for v in CO_mes:
+    if v < 0:
+        CO_neg_count = CO_neg_count + 1
 
-    return outliers, lower_bound, upper_bound
+CO_negative_value_percentage = (CO_neg_count * 100)/len(CO_mes)
 
-
-measurements = CO_mes
-outliers, lower_bound, upper_bound = find_outliers(measurements)
+print("CO_neg_count: ", CO_neg_count)
+print(len(CO_mes))
+print("CO_negative_value_percentage: ", CO_negative_value_percentage)
 
 #----------------------------------- BOX PLOTS -----------------------------------
 
-# Plot the box plot
-plt.boxplot(measurements)
-plt.title('Box plot of measurements')
-plt.ylabel('Value')
 
-# Mark the outliers with red circles
-for outlier in outliers:
-    plt.plot(1, outlier, 'r', ms=2)
+'''
+# Sample data
+data = CO_mes
 
+# Calculate quartiles
+q1 = np.percentile(data, 25)
+q3 = np.percentile(data, 75)
+
+# Calculate lower and upper bounds
+lower_bound = 0.028 #q1 - k * iqr
+upper_bound = 9 #q3 + k * iqr
+'''
+
+# Create some example data
+data = CO_mes
+
+# Calculate some summary statistics
+mean = np.mean(data)
+q1, q3 = np.percentile(data, [25, 75])
+iqr = q3 - q1
+upper_whisker = 9
+lower_whisker = 0.028
+
+# Create the bee swarm plot
+sns.swarmplot(data=data)
+
+# Add a box plot
+sns.boxplot(data=data, showcaps=False, whiskerprops={'linewidth':0}, showfliers=False)
+
+# Add the mean, quartiles, and whiskers as lines
+plt.axhline(mean, color='r', linestyle='--', label='Mean')
+plt.axhline(q1, color='g', linestyle='--', label='First Quartile')
+plt.axhline(q3, color='g', linestyle='--', label='Third Quartile')
+plt.axhline(upper_whisker, color='k', linestyle='-', label='Upper Whisker')
+plt.axhline(lower_whisker, color='k', linestyle='-', label='Lower Whisker')
+
+# Set the plot title and axis labels
+plt.title("Bee Swarm Plot with Box Plot")
+plt.xlabel("Data Points")
+plt.ylabel("Values")
+
+# Add a legend
+plt.legend()
+
+# Display the plot
 plt.show()

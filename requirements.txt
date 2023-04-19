@@ -2,3 +2,4 @@ pandas
 jason
 matplotlib
 numpy
+seaborn
