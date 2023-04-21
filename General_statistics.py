@@ -3,13 +3,13 @@ import measurement_list as ml
 import numpy as np
 import seaborn as sns
 
+NO_mes = ml.data_extraction("NO")
 NO2_mes = ml.data_extraction("NO2")
 O3_mes = ml.data_extraction("O3")
 CO_mes = ml.data_extraction("CO")
 CO2_mes = ml.data_extraction("CO2")
 Pm25_mes = ml.data_extraction("Pm25")
 
-'''
 
 print("------- general info about the data -----------")
 
@@ -98,51 +98,37 @@ ax.set_xticks(bin_centers)
 ax.set_xticklabels([f'{val:.2f}' for val in bin_centers], rotation=45, ha='right')
 
 fig.savefig('Plots/PM2.5_histogram.png')
-'''
+
 #------------------------------- DATA POSTPROCESSING ----------------
 
-#CO
+def negative_per(data):
 
-CO_neg_count = 0 #counter for negative values
+    neg_count = 0 #counter for negative values
 
-for v in CO_mes:
-    if v < 0:
-        CO_neg_count = CO_neg_count + 1
+    for v in data:
+        if v < 0:
+            neg_count = neg_count + 1
 
-CO_negative_value_percentage = (CO_neg_count * 100)/len(CO_mes)
-
-print("CO_neg_count: ", CO_neg_count)
-print(len(CO_mes))
-print("CO_negative_value_percentage: ", CO_negative_value_percentage)
+    negative_value_percentage = (neg_count * 100)/len(data)
+    return negative_value_percentage
 
 #----------------------------------- BOX PLOTS -----------------------------------
 
-
 '''
-# Sample data
-data = CO_mes
-
-# Calculate quartiles
-q1 = np.percentile(data, 25)
-q3 = np.percentile(data, 75)
-
-# Calculate lower and upper bounds
-lower_bound = 0.028 #q1 - k * iqr
-upper_bound = 9 #q3 + k * iqr
-'''
-
 # Create some example data
 data = CO_mes
+
+data = np.random.choice(CO_mes, size=20000, replace=False)
 
 # Calculate some summary statistics
 mean = np.mean(data)
 q1, q3 = np.percentile(data, [25, 75])
 iqr = q3 - q1
-upper_whisker = 9
+upper_whisker = 4
 lower_whisker = 0.028
 
 # Create the bee swarm plot
-sns.swarmplot(data=data)
+sns.swarmplot(data=data, size=1, color='k')
 
 # Add a box plot
 sns.boxplot(data=data, showcaps=False, whiskerprops={'linewidth':0}, showfliers=False)
@@ -164,3 +150,4 @@ plt.legend()
 
 # Display the plot
 plt.show()
+'''

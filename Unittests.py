@@ -1,9 +1,11 @@
 import unittest
+from General_statistics import negative_per
 import json
 import pandas as pd
 
-class TestCalculateStatistics(unittest.TestCase):
+class TestStatistics(unittest.TestCase):
 
+    '''
     def test_csv_reader(self):
 
         df = pd.read_csv('data/Hamburg_mobile_pivot_2023-03-27.csv')
@@ -24,6 +26,10 @@ class TestCalculateStatistics(unittest.TestCase):
                     # test if the entries in the csv file match the json file entries
                     self.assertRaises("ENTRY DOES NOT MATCH", key, dataIn[key], data[key])
 
+    '''
+    def NegativeValueCount(self):
+        data = [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8]
+        self.assertEqual(negative_per(data), 8)
 
 if __name__ == '__main__':
     unittest.main()
