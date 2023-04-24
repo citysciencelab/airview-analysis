@@ -29,7 +29,17 @@ print("Length of the Pm25 measurement list:", len(Pm25_mes))
 print("Maximum Pm25 value", max(Pm25_mes))
 print("Minimum Pm25 value", min(Pm25_mes))
 
+NO_lower_wisker = 15.6  # VOD in ppb
+NO2_lower_wisker = 4.6  # VOD in ppb
+NO2_upper_wisker = 500  # https://www.epa.gov/no2-pollution/primary-national-ambient-air-quality-standards-naaqs-nitrogen-dioxide - 100 ppb
+CO_lower_whisker = 0.028  # VOD in ppm
+CO_upper_whisker = 50  # EPA.gov, https://www.cdc.gov/niosh/docs/81-123/pdfs/0105.pdf
+CO2_lower_whisker = 2.4  # VOD in ppm
+CO2_upper_whisker = 1800  # heimantech.com
+Pm25_lower_whisker = 1.6  # VOD in microg/m3
+Pm25_upper_whisker = 300  # epa.vic.gov.au -75 bad for health - 300 extremely poor for 1h
 
+'''
 # ------------------------------ HISTOGRAMS -----------------------------------------
 # NO2
 
@@ -98,7 +108,7 @@ ax.set_xticks(bin_centers)
 ax.set_xticklabels([f'{val:.2f}' for val in bin_centers], rotation=45, ha='right')
 
 fig.savefig('Plots/PM2.5_histogram.png')
-
+'''
 #------------------------------- DATA POSTPROCESSING ----------------
 
 def negative_per(data):
@@ -122,6 +132,11 @@ def under_LOD_per(data, lod):
 
     uLOD_value_percentage = (uLOD_count * 100) / len(data)
     return uLOD_value_percentage
+
+print("Info: NO")
+print("Total length of data: ", len(NO_mes))
+print("% of negative data: ", negative_per(NO_mes))
+print("% of under LOD data: ", under_LOD_per(NO_mes, NO_lower_wisker))
 
 #----------------------------------- BOX PLOTS -----------------------------------
 
