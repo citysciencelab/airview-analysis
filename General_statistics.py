@@ -112,6 +112,17 @@ def negative_per(data):
     negative_value_percentage = (neg_count * 100)/len(data)
     return negative_value_percentage
 
+def under_LOD_per(data, lod):
+
+    uLOD_count = 0  # counter for negative values
+
+    for v in data:
+        if v < lod:
+            uLOD_count = uLOD_count + 1
+
+    uLOD_value_percentage = (uLOD_count * 100) / len(data)
+    return uLOD_value_percentage
+
 #----------------------------------- BOX PLOTS -----------------------------------
 
 '''

@@ -20,7 +20,7 @@ def data_extraction(sp):
 
     return sp
 
-def data_extraction(sp, file_name):
+def data_extraction_from_file(sp, file_name):
 
     field_name = sp + "med_4hours"
 
@@ -41,6 +41,7 @@ def data_extraction(sp, file_name):
 def data_without_outliers(data, low_w, high_w):
 
     data_without_outliers = []
+    outliers = []
 
     if min(data) > high_w:
         print("The upper wisker is not realistic for the given data set!")
@@ -50,6 +51,8 @@ def data_without_outliers(data, low_w, high_w):
         for v in data:
             if v >= low_w and v <= high_w:
                 data_without_outliers.append(v)
+            else:
+                outliers.append(v)
 
     if len(data_without_outliers) == 0:
         print("There is no data within the proposed limits!")
@@ -58,12 +61,16 @@ def data_without_outliers(data, low_w, high_w):
         print("max in data without outliers: ", max(data_without_outliers))
         print("min in data without outliers: ", min(data_without_outliers))
 
-    return data_without_outliers
+    return data_without_outliers, outliers
 
+def find_outliers(input_dict, lower_value, upper_value):
 
+    Outliers = {}
 
+    for outer_key, inner_dict in input_dict.items():
+        for inner_key, value in inner_dict.items():
+            if float(value) > upper_value or float(value) < lower_value:
+                Outliers[outer_key] = inner_dict.copy()
+                break
 
-
-
-
-
+    return Outliers

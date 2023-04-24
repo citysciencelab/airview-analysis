@@ -16,10 +16,11 @@ CO2_upper_whisker = 1800  # heimantech.com
 Pm25_lower_whisker = 1.6  # VOD in microg/m3
 Pm25_upper_whisker = 300  # epa.vic.gov.au -75 bad for health - 300 extremely poor for 1h
 
-NO2_data_without_outliers = ml.data_without_outliers(NO2_mes, NO2_lower_wisker, NO2_upper_wisker)
-CO2_data_without_outliers = ml.data_without_outliers(CO2_mes, CO2_lower_whisker, CO2_upper_whisker)
-CO_data_without_outliers = ml.data_without_outliers(CO_mes, CO_lower_whisker, CO_upper_whisker)
-Pm25_data_without_outliers = ml.data_without_outliers(Pm25_mes, Pm25_lower_whisker, Pm25_upper_whisker)
+#NO2_data_without_outliers = ml.data_without_outliers(NO2_mes, NO2_lower_wisker, NO2_upper_wisker)[0]
+#CO2_data_without_outliers = ml.data_without_outliers(CO2_mes, CO2_lower_whisker, CO2_upper_whisker)[0]
+#CO_data_without_outliers = ml.data_without_outliers(CO_mes, CO_lower_whisker, CO_upper_whisker)[0]
+Pm25_data_without_outliers = ml.data_without_outliers(Pm25_mes, Pm25_lower_whisker, Pm25_upper_whisker)[0]
+print("length data without outliers: ", len(Pm25_data_without_outliers))
 
 def calculate_mean(data):
     return sum(data) / len(data)
