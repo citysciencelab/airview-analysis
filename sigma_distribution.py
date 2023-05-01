@@ -8,9 +8,9 @@ CO_mes = ml.data_extraction("CO")
 CO2_mes = ml.data_extraction("CO2")
 Pm25_mes = ml.data_extraction("Pm25")
 
-#NO2_data_without_outliers = ml.data_without_outliers(NO2_mes, NO2_lower_wisker, NO2_upper_wisker)[0]
-#CO2_data_without_outliers = ml.data_without_outliers(CO2_mes, CO2_lower_whisker, CO2_upper_whisker)[0]
-#CO_data_without_outliers = ml.data_without_outliers(CO_mes, CO_lower_whisker, CO_upper_whisker)[0]
+#NO2_data_without_outliers = ml.data_without_outliers(NO2_mes, gs.NO2_lower_wisker, gs.NO2_upper_wisker)[0]
+#CO2_data_without_outliers = ml.data_without_outliers(CO2_mes, gs.CO2_lower_whisker, gs.CO2_upper_whisker)[0]
+#CO_data_without_outliers = ml.data_without_outliers(CO_mes, gs.CO_lower_whisker, gs.CO_upper_whisker)[0]
 Pm25_data_without_outliers = ml.data_without_outliers(Pm25_mes, gs.Pm25_lower_whisker, gs.Pm25_upper_whisker)[0]
 print("length data without outliers: ", len(Pm25_data_without_outliers))
 

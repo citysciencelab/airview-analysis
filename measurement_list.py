@@ -1,5 +1,15 @@
 import json
 
+def data_in_dictionary(sp):
+
+    json_file_name = "General_" + sp + ".json"
+    data_name = sp + "_data"
+    datapoint_name = sp + "_datapoints"
+
+    with open(json_file_name, 'r') as infile:
+        data_name = json.load(infile)
+
+    return data_name
 
 def data_extraction(sp):
 
@@ -74,3 +84,38 @@ def find_outliers(input_dict, lower_value, upper_value):
                 break
 
     return Outliers
+
+def upper_outliers_from_dictionary(sp, input_dict, upper_value):
+
+    outliers = {}
+    not_outliers = {}
+
+    for key, inner_dict in input_dict.items():
+        if float(inner_dict[sp]) > upper_value:
+            outliers[key] = inner_dict
+        else:
+            not_outliers[key] = inner_dict
+
+    if len(not_outliers) + len(outliers) == len(input_dict):
+        print("--------- data valid split ------------")
+    else:
+        print("Check data split!")
+
+    min_value = float("inf")
+    max_value = float("-inf")
+
+    print("Number of ",sp, "outliers: ", len(outliers))
+
+    if len(outliers) > 0:
+        for inner_dict in outliers.values():
+            val = float(inner_dict[sp])
+            min_value = min(min_value, val)
+            max_value = max(max_value, val)
+
+        print(f"new minimum value: {min_value}")
+        print(f"new maximum value: {max_value}")
+    else:
+        print("Outlier dictionary empty")
+
+
+    return outliers

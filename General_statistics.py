@@ -13,6 +13,9 @@ Pm25_mes = ml.data_extraction("Pm25")
 
 print("------- general info about the data -----------")
 
+print("Length of the NO measurement list:", len(NO_mes))
+print("Maximum NO value", max(NO_mes))
+print("Minimum NO value", min(NO_mes))
 print("Length of the NO2 measurement list:", len(NO2_mes))
 print("Maximum NO2 value", max(NO2_mes))
 print("Minimum NO2 value", min(NO2_mes))
@@ -30,12 +33,15 @@ print("Maximum Pm25 value", max(Pm25_mes))
 print("Minimum Pm25 value", min(Pm25_mes))
 
 NO_lower_wisker = 15.6  # VOD in ppb
+NO_upper_wisker = 3*100   # like NO2 (usually given as NOx)
 NO2_lower_wisker = 4.6  # VOD in ppb
-NO2_upper_wisker = 500  # https://www.epa.gov/no2-pollution/primary-national-ambient-air-quality-standards-naaqs-nitrogen-dioxide - 100 ppb
+NO2_upper_wisker = 3*100  # https://www.epa.gov/no2-pollution/primary-national-ambient-air-quality-standards-naaqs-nitrogen-dioxide - 100 ppb
+O3_lower_wisker = 3     # VOD in ppb
+O3_upper_wisker = 70  # ppb from https://en.air-q.com/grenzwerte - alarming values for 1h (can be reduced to 70 https://www.epa.gov/sites/default/files/2016-04/documents/20151001basicsfs.pdf)
 CO_lower_whisker = 0.028  # VOD in ppm
-CO_upper_whisker = 50  # EPA.gov, https://www.cdc.gov/niosh/docs/81-123/pdfs/0105.pdf
+CO_upper_whisker = 9  # EPA.gov, 35/50 ppm https://www.cdc.gov/niosh/docs/81-123/pdfs/0105.pdf, https://www.co2meter.com/blogs/news/carbon-monoxide-levels-chart
 CO2_lower_whisker = 2.4  # VOD in ppm
-CO2_upper_whisker = 1800  # heimantech.com
+CO2_upper_whisker = 1000  # https://www.dhs.wisconsin.gov/chemical/carbondioxide.htm#:~:text=The%20levels%20of%20CO2,of%20drowsiness%20and%20poor%20air.
 Pm25_lower_whisker = 1.6  # VOD in microg/m3
 Pm25_upper_whisker = 300  # epa.vic.gov.au -75 bad for health - 300 extremely poor for 1h
 
@@ -108,7 +114,7 @@ ax.set_xticks(bin_centers)
 ax.set_xticklabels([f'{val:.2f}' for val in bin_centers], rotation=45, ha='right')
 
 fig.savefig('Plots/PM2.5_histogram.png')
-'''
+
 #------------------------------- DATA POSTPROCESSING ----------------
 
 def negative_per(data):
@@ -137,10 +143,24 @@ print("Info: NO")
 print("Total length of data: ", len(NO_mes))
 print("% of negative data: ", negative_per(NO_mes))
 print("% of under LOD data: ", under_LOD_per(NO_mes, NO_lower_wisker))
-
+print("Info: NO2")
+print("% of negative data: ", negative_per(NO2_mes))
+print("% of under LOD data: ", under_LOD_per(NO2_mes, NO2_lower_wisker))
+print("Info: O3")
+print("% of negative data: ", negative_per(O3_mes))
+print("% of under LOD data: ", under_LOD_per(O3_mes, O3_lower_wisker))
+print("Info: CO")
+print("% of negative data: ", negative_per(CO_mes))
+print("% of under LOD data: ", under_LOD_per(CO_mes, CO_lower_whisker))
+print("Info: CO2")
+print("% of negative data: ", negative_per(CO2_mes))
+print("% of under LOD data: ", under_LOD_per(CO2_mes, CO2_lower_whisker))
+print("Info: PM2.5")
+print("% of negative data: ", negative_per(Pm25_mes))
+print("% of under LOD data: ", under_LOD_per(Pm25_mes, Pm25_lower_whisker))
 #----------------------------------- BOX PLOTS -----------------------------------
 
-'''
+
 # Create some example data
 data = CO_mes
 

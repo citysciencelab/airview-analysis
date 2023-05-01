@@ -9,7 +9,7 @@ data_CO = {}
 data_CO2 = {}
 data_Pm25 = {}
 
-'''
+
 df = pd.read_csv('data/Hamburg_mobile_pivot_2023-03-27.csv')
 
 for index, row in df.iterrows():
@@ -55,8 +55,8 @@ with open('General_CO2.json', 'w') as outfile:
 # write the PM2.5 dictionary to a JSON file
 with open('General_Pm25.json', 'w') as outfile:
     json.dump(data_Pm25, outfile)
-'''
-#--------------- Reading road segments in ----------------------------------------
+
+#--------------- for short outlier overview ----------------------------------------
 df = pd.read_csv('data/Hamburg_mobile_pivot_2023-03-27.csv')
 
 Pm25_short_data = {}
@@ -69,7 +69,8 @@ for index, row in df.iterrows():
 with open('Pm25_short_data.json', 'w') as outfile:
     json.dump(Pm25_short_data, outfile)
 
-'''
+#--------------- Reading road segments in ----------------------------------------
+
 df_split = pd.read_csv('data/ham_roads_split50flt_data_2023-03-27.csv')
 
 Pm25_segments = {}
@@ -81,4 +82,3 @@ for index, row in df_split.iterrows():
 
 with open('Pm25_segments.json', 'w') as outfile:
     json.dump(Pm25_segments, outfile)
-'''
