@@ -3,6 +3,7 @@ import measurement_list as ml
 import numpy as np
 import seaborn as sns
 
+'''
 NO_mes = ml.data_extraction("NO")
 NO2_mes = ml.data_extraction("NO2")
 O3_mes = ml.data_extraction("O3")
@@ -32,6 +33,11 @@ print("Length of the Pm25 measurement list:", len(Pm25_mes))
 print("Maximum Pm25 value", max(Pm25_mes))
 print("Minimum Pm25 value", min(Pm25_mes))
 
+print("-------------------------------")
+
+
+#--------------- Upper wiskets defined ------------------------
+
 NO_lower_wisker = 15.6  # VOD in ppb
 NO_upper_wisker = 3*100   # like NO2 (usually given as NOx)
 NO2_lower_wisker = 4.6  # VOD in ppb
@@ -44,6 +50,22 @@ CO2_lower_whisker = 2.4  # VOD in ppm
 CO2_upper_whisker = 1000  # https://www.dhs.wisconsin.gov/chemical/carbondioxide.htm#:~:text=The%20levels%20of%20CO2,of%20drowsiness%20and%20poor%20air.
 Pm25_lower_whisker = 1.6  # VOD in microg/m3
 Pm25_upper_whisker = 300  # epa.vic.gov.au -75 bad for health - 300 extremely poor for 1h
+'''
+
+#----------------- Upper wiskers calculated ---------------
+
+NO_lower_wisker = 15.6  # VOD in ppb
+NO_upper_wisker = 300   # the value is irrelevant
+NO2_lower_wisker = 4.6  # VOD in ppb
+NO2_upper_wisker = 28.86
+O3_lower_wisker = 3     # VOD in ppb
+O3_upper_wisker = 29.36
+CO_lower_whisker = 0.028  # VOD in ppm
+CO_upper_whisker = 0.58
+CO2_lower_whisker = 2.4  # VOD in ppm
+CO2_upper_whisker = 487.1
+Pm25_lower_whisker = 1.6  # VOD in microg/m3
+Pm25_upper_whisker = 20.9
 
 '''
 # ------------------------------ HISTOGRAMS -----------------------------------------
