@@ -25,64 +25,65 @@ def calculate_standard_deviation(data, mean):
     variance = sum(squared_diffs) / (len(data) - 1)
     return np.sqrt(variance)
 
-def calculate_mean_plus_minus_sigma(mean, std_dev):
-    lower_bound = mean - std_dev
-    upper_bound = mean + std_dev
+def calculate_mean_plus_minus_sigma(n, mean, std_dev):
+    lower_bound = mean - n*std_dev
+    upper_bound = mean + n*std_dev
     return lower_bound, upper_bound
 
-def calculate_mean_plus_minus_2sigma(mean, std_dev):
-    lower_bound = mean - 2*std_dev
-    upper_bound = mean + 2*std_dev
-    return lower_bound, upper_bound
 
 def mean_sigma(data):
     mean = calculate_mean(data)
     std_dev = calculate_standard_deviation(data, mean)
-    one_sigma_lower_bound, one_sigma_upper_bound = calculate_mean_plus_minus_sigma(mean, std_dev)
-    two_sigma_lower_bound, two_sigma_upper_bound = calculate_mean_plus_minus_2sigma(mean, std_dev)
-    return mean, std_dev, one_sigma_lower_bound, one_sigma_upper_bound, two_sigma_lower_bound, two_sigma_upper_bound
+    one_sigma_lower_bound, one_sigma_upper_bound = calculate_mean_plus_minus_sigma(1, mean, std_dev)
+    two_sigma_lower_bound, two_sigma_upper_bound = calculate_mean_plus_minus_sigma(2, mean, std_dev)
+    three_sigma_lower_bound, three_sigma_upper_bound = calculate_mean_plus_minus_sigma(3, mean, std_dev)
+    return mean, std_dev, one_sigma_lower_bound, one_sigma_upper_bound, two_sigma_lower_bound, two_sigma_upper_bound, three_sigma_lower_bound, three_sigma_upper_bound
 
 
-mean, std_dev, one_sigma_lower_bound, one_sigma_upper_bound, two_sigma_lower_bound, two_sigma_upper_bound = mean_sigma(NO2_data_without_outliers)
+mean, std_dev, one_sigma_lower_bound, one_sigma_upper_bound, two_sigma_lower_bound, two_sigma_upper_bound, three_sigma_lower_bound, three_sigma_upper_bound = mean_sigma(NO2_data_without_outliers)
 
 print("Species: NO2")
 print("Mean:", mean)
 print("Standard Deviation:", std_dev)
 print("Mean ± Sigma Range:", one_sigma_lower_bound, "to", one_sigma_upper_bound)
 print("Mean ± 2Sigma Range:", two_sigma_lower_bound, "to", two_sigma_upper_bound)
+print("Mean ± 3Sigma Range:", three_sigma_lower_bound, "to", three_sigma_upper_bound)
 
-mean, std_dev, one_sigma_lower_bound, one_sigma_upper_bound, two_sigma_lower_bound, two_sigma_upper_bound = mean_sigma(O3_data_without_outliers)
+mean, std_dev, one_sigma_lower_bound, one_sigma_upper_bound, two_sigma_lower_bound, two_sigma_upper_bound, three_sigma_lower_bound, three_sigma_upper_bound = mean_sigma(O3_data_without_outliers)
 
 print("Species: O3")
 print("Mean:", mean)
 print("Standard Deviation:", std_dev)
 print("Mean ± Sigma Range:", one_sigma_lower_bound, "to", one_sigma_upper_bound)
 print("Mean ± 2Sigma Range:", two_sigma_lower_bound, "to", two_sigma_upper_bound)
+print("Mean ± 3Sigma Range:", three_sigma_lower_bound, "to", three_sigma_upper_bound)
 
-mean, std_dev, one_sigma_lower_bound, one_sigma_upper_bound, two_sigma_lower_bound, two_sigma_upper_bound = mean_sigma(CO_data_without_outliers)
+mean, std_dev, one_sigma_lower_bound, one_sigma_upper_bound, two_sigma_lower_bound, two_sigma_upper_bound, three_sigma_lower_bound, three_sigma_upper_bound = mean_sigma(CO_data_without_outliers)
 
 print("Species: CO")
 print("Mean:", mean)
 print("Standard Deviation:", std_dev)
 print("Mean ± Sigma Range:", one_sigma_lower_bound, "to", one_sigma_upper_bound)
 print("Mean ± 2Sigma Range:", two_sigma_lower_bound, "to", two_sigma_upper_bound)
+print("Mean ± 3Sigma Range:", three_sigma_lower_bound, "to", three_sigma_upper_bound)
 
-mean, std_dev, one_sigma_lower_bound, one_sigma_upper_bound, two_sigma_lower_bound, two_sigma_upper_bound = mean_sigma(CO2_data_without_outliers)
+mean, std_dev, one_sigma_lower_bound, one_sigma_upper_bound, two_sigma_lower_bound, two_sigma_upper_bound, three_sigma_lower_bound, three_sigma_upper_bound = mean_sigma(CO2_data_without_outliers)
 
 print("Species: CO2")
 print("Mean:", mean)
 print("Standard Deviation:", std_dev)
 print("Mean ± Sigma Range:", one_sigma_lower_bound, "to", one_sigma_upper_bound)
 print("Mean ± 2Sigma Range:", two_sigma_lower_bound, "to", two_sigma_upper_bound)
+print("Mean ± 3Sigma Range:", three_sigma_lower_bound, "to", three_sigma_upper_bound)
 
-mean, std_dev, one_sigma_lower_bound, one_sigma_upper_bound, two_sigma_lower_bound, two_sigma_upper_bound = mean_sigma(Pm25_data_without_outliers)
+mean, std_dev, one_sigma_lower_bound, one_sigma_upper_bound, two_sigma_lower_bound, two_sigma_upper_bound, three_sigma_lower_bound, three_sigma_upper_bound = mean_sigma(Pm25_data_without_outliers)
 
 print("Species: PM2.5")
 print("Mean:", mean)
 print("Standard Deviation:", std_dev)
 print("Mean ± Sigma Range:", one_sigma_lower_bound, "to", one_sigma_upper_bound)
 print("Mean ± 2Sigma Range:", two_sigma_lower_bound, "to", two_sigma_upper_bound)
-
+print("Mean ± 3Sigma Range:", three_sigma_lower_bound, "to", three_sigma_upper_bound)
 
 
 '''

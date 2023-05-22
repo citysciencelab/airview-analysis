@@ -1,14 +1,12 @@
 import json
 import pandas as pd
 
-
 data_NO = {}
 data_NO2 = {}
 data_O3 = {}
 data_CO = {}
 data_CO2 = {}
 data_Pm25 = {}
-
 
 df = pd.read_csv('data/Hamburg_mobile_pivot_2023-03-27.csv')
 
@@ -82,3 +80,24 @@ for index, row in df_split.iterrows():
 
 with open('Pm25_segments.json', 'w') as outfile:
     json.dump(Pm25_segments, outfile)
+
+#------------------------------ Grid segment IDs --------------------------------
+
+qID_NO = {}
+qID_NO2 = {}
+qID_O3 = {}
+qID_CO = {}
+qID_CO2 = {}
+qID_Pm25 = {}
+
+df = pd.read_csv('data/output_500m_pm25.csv')
+
+for index, row in df.iterrows():
+    key = row[3]  # use the GPS timestamp column as the key - because it is unique
+    qID_Pm25[key] = {'qID': float(row[0]), 'value': float(row[2])}
+
+# write the PM2.5 dictionary with qID to a JSON file
+with open('qID_Pm25.json', 'w') as outfile:
+    json.dump(qID_Pm25, outfile)
+
+print(len(qID_Pm25))

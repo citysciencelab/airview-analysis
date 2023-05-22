@@ -60,5 +60,4 @@ Pm25_dict = ml.data_in_dictionary("Pm25")
 outl_Pm25 = ml.upper_outliers_from_dictionary("Pm25", Pm25_dict, gs.Pm25_upper_whisker)
 jw.write_out("Pm25", outl_Pm25)
 
-#TODO: possible hot spots
 
