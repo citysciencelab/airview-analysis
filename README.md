@@ -1,6 +1,22 @@
-# airview-analysis
-Working repository for the AirView project
+# Project Air View Hamburg
 
+## Project Description
+
+
+
+## Discussion Paper (german)
+The discussion paper summarizes the research results of the City Science Lab (CSL) at HafenCity University on Project Air View Hamburg. It was prepared on the occasion of the presentation of the data collected by Google on air quality in Hamburg on June 13, 2023 in order to provide scientific information to the interested public. Central points of the discussion paper are the explanation of the project background and the research method, urban planning considerations based on the processed data, possible use case for urban and transportation planning as well as the identification of different potentials of the measurement method.
+https://repos.hcu-hamburg.de/handle/hcu/976
+DOI: 10.34712/142.50
+
+## Raw Data
+It contains the air quality data measured by Google as part of Project Air View. According to Google, it contains 23 million data points from over 2 million measurement locations. The measured substances are CO, CO2, NO2, NO, O3, as well as six channels for particulate matter PM2.5. PM2.5 was also calculated as a total value. The data was subjected to a quality check by the manufacturer of the sensors, Aclima, after each sampling. The data is available as 1-second point data and as lines aggregated to 50 meter long road segments. Both formats are available as CSV and GeoJSON files and are specified in the measurement units ppb and μ/m³. The data contains information on the time of measurement and velocity, among other things. Further information and the description of the column name can be found in the .txt files. An additional metadata description can be found at https://aclima.docsend.com/view/e5jdrrkfnway7rj2. The CSV files can be converted into shape files using Python and the GeoPandas library, for example.
+https://repos.hcu-hamburg.de/handle/hcu/893
+DOI: 10.34712/042.1
+
+## airview-analysis
+Working repository for the AirView project. 
+To run the code above:
 1. Have the csv data in the data folder. 
 2. Running csv_reader.py will read in the NO2 measurements from the latest csv file provided by Google and write 
 them out (along with their location and unique time stamp) to a json file. This json file will be used for the general 
