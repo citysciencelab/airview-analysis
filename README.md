@@ -1,6 +1,6 @@
 # Project Air View Hamburg
 
-![Project Air View car](https://storage.googleapis.com/gweb-uniblog-publish-prod/images/mielek-google-air-view-hh-001.max-2000x2000.format-webp.webp)
+![Project Air View car](file:///Users/hrf810/Downloads/mielek-google-air-view-hh-001.max-2000x2000.format-webp.webp)
 
 ## Project Description
 Air pollution is considered one of the largest environmental health impacts, with outdoor air pollution causing more than 4.2 million premature deaths worldwide each year. Air quality can vary within city districts and even within street sections. Project Air View in Hamburg is a scientific project of Google and HafenCity University (HCU) / City Scienece Lab (CSL) to measure, map, and publish hyperlocal air quality data in Hamburg. Project Air View uses an all-electric vehicle equipped with air quality sensors to measure fine particulate matter (PM 2.5), nitric oxide(NO), nitrogen dioxide (NO2), carbon monoxide (CO), carbon dioxide (CO2), and ozone (O3), which are harmful to both our climate and human health. 
